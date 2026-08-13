@@ -5,6 +5,8 @@
 	 * Here the control downloads instead of playing. It fades in once the hero's
 	 * own buttons have scrolled away, so the CTA is never doubled on screen.
 	 */
+	import logo from '$lib/assets/vex-logo.png';
+
 	let { href }: { href: string } = $props();
 
 	let past = $state(false);
@@ -20,7 +22,7 @@
 
 <div class="transport" class:past aria-hidden={!past}>
 	<div class="inner">
-		<img class="art" src="/vex-logo.png" alt="" />
+		<img class="art" src={logo} alt="" />
 		<div class="meta">
 			<span class="title">VexWave</span>
 			<span class="sub">Desktop music player · your server</span>

@@ -13,7 +13,8 @@
 	font-style: normal;
 	font-weight: 600;
 	font-display: swap;
-	src: url('/fonts/outfit-600-latin.woff2') format('woff2');
+	/* Resolved by Vite, so the hashed name and the Pages base path both apply. */
+	src: url('./lib/assets/fonts/outfit-600-latin.woff2') format('woff2');
 }
 
 /*

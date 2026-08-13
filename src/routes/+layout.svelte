@@ -1,11 +1,12 @@
 <script lang="ts">
 	import '../app.css';
+	import logo from '$lib/assets/vex-logo.png';
 
 	let { children } = $props();
 </script>
 
 <svelte:head>
-	<link rel="icon" href="/vex-logo.png" />
+	<link rel="icon" href={logo} />
 </svelte:head>
 
 {@render children()}

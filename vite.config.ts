@@ -1,6 +1,15 @@
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
+
+/*
+ * Pages serves a project site under /<repo>, so every generated URL needs that
+ * prefix. The workflow passes it from the configure-pages action, which reports
+ * an empty string once a custom domain is set — so this handles both without a
+ * code change. Unset locally, and anything not rooted at / is ignored.
+ */
+const basePath = process.env.BASE_PATH ?? '';
+const base = basePath.startsWith('/') ? (basePath as `/${string}`) : '';
 
 export default defineConfig({
 	plugins: [
@@ -11,10 +20,9 @@ export default defineConfig({
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
 
-			// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
-			// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-			// See https://svelte.dev/docs/kit/adapters for more information about adapters.
-			adapter: adapter()
+			adapter: adapter(),
+
+			paths: { base }
 		})
 	]
 });

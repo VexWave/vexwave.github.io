@@ -1,6 +1,11 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import WaveBars from '$lib/components/WaveBars.svelte';
 	import TransportBar from '$lib/components/TransportBar.svelte';
+	import logo from '$lib/assets/vex-logo.png';
+	import libraryShot from '$lib/assets/shots/library.png';
+	import discoverShot from '$lib/assets/shots/discover.png';
+	import settingsShot from '$lib/assets/shots/settings.png';
 
 	const REPO = 'https://github.com/VexWave/vex-app';
 	const DOWNLOAD = `${REPO}/releases/latest`;
@@ -28,8 +33,8 @@
 <TransportBar href={DOWNLOAD} />
 
 <header class="masthead">
-	<a class="brand" href="/">
-		<img src="/vex-logo.png" alt="" width="28" height="26" />
+	<a class="brand" href="{base}/">
+		<img src={logo} alt="" width="28" height="26" />
 		<span>VexWave</span>
 	</a>
 	<a class="masthead-link" href={REPO} rel="noreferrer">
@@ -55,7 +60,7 @@
 
 	<section class="shot shot-lead">
 		<img
-			src="/shots/library.png"
+			src={libraryShot}
 			alt="The VexWave library: fourteen tracks with cover art, a playlist sidebar, and Static Bloom playing in the transport bar."
 			width="1800"
 			height="1188"
@@ -87,7 +92,7 @@
 
 	<section class="shot">
 		<img
-			src="/shots/discover.png"
+			src={discoverShot}
 			alt="Discover: YouTube search results inside VexWave, with one of them downloading into the library."
 			loading="lazy"
 			width="1800"
@@ -98,7 +103,7 @@
 
 	<section class="shot">
 		<img
-			src="/shots/settings.png"
+			src={settingsShot}
 			alt="Settings: the ten-band equalizer with its sliders, beside the Discord presence switch."
 			loading="lazy"
 			width="1800"
