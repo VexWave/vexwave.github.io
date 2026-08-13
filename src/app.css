@@ -1,0 +1,116 @@
+@import '@fontsource/instrument-sans/400.css';
+@import '@fontsource/instrument-sans/500.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+
+/*
+ * Outfit SemiBold, the same file the app vendors for its wordmark — copied
+ * rather than pulled from a CDN so the site and the app render the name in
+ * the identical face.
+ */
+@font-face {
+	font-family: 'Outfit';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url('/fonts/outfit-600-latin.woff2') format('woff2');
+}
+
+/*
+ * One theme, deliberately. VexWave's chrome is dark, and all three product
+ * shots are dark-on-dark; a light ground would leave them floating as black
+ * slabs. The neutrals are biased toward the brand violet rather than pure
+ * grey, so the ground reads as part of the accent's family.
+ */
+:root {
+	--ink: #08070c;
+	--ink-raised: #100d18;
+	--ink-sunken: #05040a;
+	--line: #1e1a2b;
+	--line-bright: #2c2640;
+
+	--paper: #f3f1f8;
+	--paper-dim: #9a94ac;
+	--paper-faint: #6b6580;
+
+	/* The app's --nav triad, at the three lightnesses the mark needs. */
+	--wave: #7b2df0;
+	--wave-edge: #9a5bf5;
+	--wave-bright: #c4a2fb;
+
+	--display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+	--body: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+	--mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+	/* Height of the fixed transport bar; content reserves it at the page foot. */
+	--transport: 76px;
+
+	color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	background: var(--ink);
+	color: var(--paper);
+	font-family: var(--body);
+	font-size: 1rem;
+	line-height: 1.65;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+	font-family: var(--display);
+	font-weight: 600;
+	line-height: 1.05;
+	letter-spacing: -0.02em;
+	text-wrap: balance;
+	margin: 0;
+}
+
+p {
+	margin: 0;
+}
+
+a {
+	color: inherit;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+:focus-visible {
+	outline: 2px solid var(--wave-edge);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+
+::selection {
+	background: var(--wave);
+	color: var(--paper);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
