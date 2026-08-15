@@ -2,7 +2,7 @@
 	/*
 	 * A spectrum analyser rather than a marching sine: the app's equalizer runs
 	 * ten bands from deep bass to the top of the treble, so the row is tilted
-	 * the way a spectrum is — tall and slow at the low end on the left, shorter
+	 * the way a spectrum is: tall and slow at the low end on the left, shorter
 	 * and quicker toward the right.
 	 */
 	let { count = 28, height = '4.5rem' }: { count?: number; height?: string } = $props();

@@ -4,7 +4,7 @@
 @import '@fontsource/ibm-plex-mono/500.css';
 
 /*
- * Outfit SemiBold, the same file the app vendors for its wordmark — copied
+ * Outfit SemiBold, the same file the app vendors for its wordmark. Copied
  * rather than pulled from a CDN so the site and the app render the name in
  * the identical face.
  */
