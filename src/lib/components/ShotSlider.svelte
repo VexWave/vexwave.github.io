@@ -10,7 +10,6 @@
 			label: 'Library',
 			src: libraryShot,
 			alt: 'The VexWave library: fourteen tracks with cover art, a playlist sidebar, and Static Bloom playing in the transport bar.',
-			blurb: 'Everything on the server in one list, with playlists, artist pages and search across the lot.',
 			items: ['Playlists', 'Artists', 'Search', 'Track editing']
 		},
 		{
@@ -18,25 +17,21 @@
 			label: 'Discover',
 			src: discoverShot,
 			alt: 'Discover: YouTube search results inside VexWave, with one of them downloading into the library.',
-			blurb: 'Add what you do not have yet. Search YouTube and SoundCloud or bring local files in; every new track uploads back to the server.',
-			items: ['Local files', 'YouTube', 'SoundCloud', 'Discover']
+			items: ['YouTube', 'SoundCloud', 'One-click download']
 		},
 		{
 			id: 'effects',
 			label: 'Effects',
 			src: effectsShot,
 			alt: 'The effects panel open above the player bar, with speed, keep pitch, drive and reverb.',
-			blurb:
-				'Speed, drive and reverb from the player bar. Half speed to one and a half, with the pitch dropped like tape or held where it was.',
-			items: ['Speed', 'Keep pitch', 'Drive', 'Reverb']
+			items: ['Speed', 'Drive', 'Reverb']
 		},
 		{
 			id: 'settings',
 			label: 'Settings',
 			src: settingsShot,
 			alt: 'Settings: the ten-band equalizer with its sliders, beside the Discord presence switch.',
-			blurb: 'Ten bands of equalizer, shuffle and repeat, and a Discord status that names whatever is playing.',
-			items: ['Shuffle', 'Repeat', 'Ten-band equalizer', 'Discord presence']
+			items: ['Shuffle', 'Repeat', 'Equalizer', 'Discord presence']
 		}
 	];
 
@@ -79,6 +74,7 @@
 			style:--n={slides.length}
 			style:--i={index}
 		>
+			<span class="glide" aria-hidden="true"></span>
 			{#each slides as slide, i (slide.id)}
 				<button
 					bind:this={tabs[i]}
@@ -96,7 +92,6 @@
 					{slide.label}
 				</button>
 			{/each}
-			<span class="rail" aria-hidden="true"></span>
 		</div>
 
 		<div class="controls">
@@ -129,14 +124,11 @@
 					height="1188"
 				/>
 
-				<div class="say">
-					<p class="blurb">{slide.blurb}</p>
-					<ul class="items">
-						{#each slide.items as item (item)}
-							<li>{item}</li>
-						{/each}
-					</ul>
-				</div>
+				<ul class="items">
+					{#each slide.items as item (item)}
+						<li>{item}</li>
+					{/each}
+				</ul>
 			</div>
 		{/each}
 	</div>
@@ -146,45 +138,59 @@
 	.tour {
 		display: flex;
 		flex-direction: column;
-		gap: 1.6rem;
+		gap: 2rem;
 	}
 
 	/* ---- tab strip -------------------------------------------------------- */
 
 	.tabs {
 		display: flex;
-		align-items: flex-end;
+		align-items: center;
 		flex-wrap: wrap;
-		gap: 0.75rem 1.5rem;
+		gap: 1rem 1.5rem;
 	}
 
-	/* Capped: stretched to the full 1180px the rail reads as a bar, not a playhead. */
+	/* Capped: stretched to the full 1180px the strip reads as a toolbar. */
 	.strip {
 		position: relative;
-		flex: 0 1 30rem;
-		display: flex;
-		border-bottom: 1px solid var(--line-bright);
+		flex: 0 1 34rem;
+		display: grid;
+		grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+		padding: 4px;
+		border: 1px solid var(--line-bright);
+		border-radius: 999px;
+		background: var(--ink-raised);
+	}
+
+	/* Stepped in units of its own width, so nothing has to measure the DOM. */
+	.glide {
+		position: absolute;
+		top: 4px;
+		bottom: 4px;
+		left: 4px;
+		width: calc((100% - 8px) / var(--n));
+		border-radius: 999px;
+		background: var(--wave);
+		box-shadow: 0 8px 20px -10px var(--wave);
+		transform: translateX(calc(var(--i) * 100%));
+		transition: transform 420ms cubic-bezier(0.22, 0.7, 0.2, 1);
 	}
 
 	.tab {
-		flex: 1 1 0;
-		min-width: 0;
+		position: relative;
 		appearance: none;
 		background: none;
 		border: 0;
-		padding: 0 0.5rem 1.1rem;
-		text-align: left;
+		border-radius: 999px;
+		padding: 0.6rem 0.5rem;
 		cursor: pointer;
 		font-family: var(--mono);
-		font-size: 0.75rem;
-		letter-spacing: 0.14em;
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
 		text-transform: uppercase;
 		color: var(--paper-faint);
-		transition: color 160ms ease;
-	}
-
-	.tab:first-child {
-		padding-left: 0;
+		transition: color 200ms ease;
 	}
 
 	.tab:hover {
@@ -192,28 +198,14 @@
 	}
 
 	.tab.on {
-		color: var(--wave-bright);
-	}
-
-	/* Stepped in units of its own width, so nothing has to measure the DOM. */
-	.rail {
-		position: absolute;
-		left: 0;
-		bottom: -1px;
-		height: 2px;
-		width: calc(100% / var(--n));
-		background: var(--wave-bright);
-		transform: translateX(calc(var(--i) * 100%));
-		transition: transform 340ms cubic-bezier(0.22, 0.7, 0.2, 1);
+		color: var(--paper);
 	}
 
 	.controls {
 		display: flex;
 		align-items: center;
-		align-self: flex-end;
 		margin-left: auto;
 		gap: 0.6rem;
-		padding-bottom: 0.7rem;
 	}
 
 	.count {
@@ -235,11 +227,11 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 34px;
-		height: 34px;
+		width: 36px;
+		height: 36px;
 		border-radius: 999px;
 		border: 1px solid var(--line-bright);
-		background: none;
+		background: var(--ink-raised);
 		color: var(--paper-dim);
 		cursor: pointer;
 		transition:
@@ -252,6 +244,10 @@
 		border-color: var(--wave-edge);
 		color: var(--paper);
 		transform: scale(1.06);
+	}
+
+	.step:active {
+		transform: scale(0.96);
 	}
 
 	.step svg {
@@ -274,38 +270,45 @@
 		grid-area: 1 / 1;
 		display: flex;
 		flex-direction: column;
-		gap: 1.4rem;
-		opacity: 0;
-		transition: opacity 280ms ease;
+		gap: 1.3rem;
 	}
 
-	.panel.on {
+	/* Shot and list carry the fade so they can arrive one after the other. */
+	.panel img,
+	.panel .items {
+		opacity: 0;
+		transform: translateY(14px);
+		transition:
+			opacity 200ms ease,
+			transform 200ms ease;
+	}
+
+	.panel.on img,
+	.panel.on .items {
 		opacity: 1;
+		transform: none;
+		transition:
+			opacity 420ms ease 80ms,
+			transform 560ms cubic-bezier(0.22, 0.7, 0.2, 1) 80ms;
+	}
+
+	.panel.on .items {
+		transition-delay: 160ms;
 	}
 
 	.panel img {
 		width: 100%;
 		height: auto;
 		border: 1px solid var(--line);
-		border-radius: 10px;
+		border-radius: 12px;
 		background: var(--ink-sunken);
 		box-shadow: 0 40px 120px -40px color-mix(in srgb, var(--wave) 65%, transparent);
 	}
 
-	.say {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr) minmax(0, 16rem);
-		gap: 1.5rem 2.5rem;
-		align-items: start;
-	}
-
-	.blurb {
-		max-width: 46ch;
-		font-size: clamp(1.05rem, 1.5vw, 1.2rem);
-		color: var(--paper-dim);
-	}
-
 	.items {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem 1.9rem;
 		list-style: none;
 		margin: 0;
 		padding: 0;
@@ -314,29 +317,34 @@
 	.items li {
 		display: flex;
 		align-items: center;
-		min-height: 2.7rem;
-		border-bottom: 1px solid var(--line);
+		gap: 0.65rem;
 		font-family: var(--display);
-		font-size: 1.05rem;
+		font-size: 1.02rem;
 		letter-spacing: -0.01em;
 	}
 
-	.items li:last-child {
-		border-bottom: 0;
+	.items li::before {
+		content: '';
+		flex: none;
+		width: 5px;
+		height: 5px;
+		border-radius: 999px;
+		background: var(--wave-edge);
 	}
 
 	/* ---- narrow ------------------------------------------------------------ */
-
-	@media (max-width: 720px) {
-		.say {
-			grid-template-columns: minmax(0, 1fr);
-		}
-	}
 
 	/* Below this the tabs and the controls stop sharing a line comfortably. */
 	@media (max-width: 640px) {
 		.strip {
 			flex-basis: 100%;
+		}
+	}
+
+	@media (max-width: 420px) {
+		.tab {
+			font-size: 0.64rem;
+			letter-spacing: 0.06em;
 		}
 	}
 </style>
