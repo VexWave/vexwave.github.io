@@ -36,8 +36,6 @@
 	<section class="hero">
 		<h1>A desktop music player for your own server.</h1>
 
-		<p class="lead">Streams every track from it. Uploads everything new back to it.</p>
-
 		<div class="actions">
 			<a class="btn-primary" href={REPO} rel="noreferrer">View on GitHub</a>
 			<a class="btn-quiet" href="#setup">What you need</a>
@@ -195,15 +193,14 @@
 		padding-top: clamp(2rem, 6vw, 4.5rem);
 	}
 
+	/* Carries the hero on its own, so it runs larger than any heading below. */
 	.hero h1 {
-		font-size: clamp(2.6rem, 6.2vw, 4.75rem);
+		font-size: clamp(2.8rem, 7vw, 5.5rem);
 		max-width: 17ch;
 	}
 
-	.lead {
-		max-width: 44ch;
-		font-size: clamp(1.05rem, 1.5vw, 1.2rem);
-		color: var(--paper-dim);
+	.hero .actions {
+		margin-top: 0.6rem;
 	}
 
 	/* Sits with the buttons rather than waiting in the setup section below. */
