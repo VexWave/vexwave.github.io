@@ -1,6 +1,7 @@
 <script lang="ts">
 	import libraryShot from '$lib/assets/shots/library.png';
 	import discoverShot from '$lib/assets/shots/discover.png';
+	import effectsShot from '$lib/assets/shots/effects.png';
 	import settingsShot from '$lib/assets/shots/settings.png';
 
 	const slides = [
@@ -19,6 +20,15 @@
 			alt: 'Discover: YouTube search results inside VexWave, with one of them downloading into the library.',
 			blurb: 'Add what you do not have yet. Search YouTube and SoundCloud or bring local files in; every new track uploads back to the server.',
 			items: ['Local files', 'YouTube', 'SoundCloud', 'Discover']
+		},
+		{
+			id: 'effects',
+			label: 'Effects',
+			src: effectsShot,
+			alt: 'The effects panel open above the player bar, with speed, keep pitch, drive and reverb.',
+			blurb:
+				'Speed, drive and reverb from the player bar. Half speed to one and a half, with the pitch dropped like tape or held where it was.',
+			items: ['Speed', 'Keep pitch', 'Drive', 'Reverb']
 		},
 		{
 			id: 'settings',
