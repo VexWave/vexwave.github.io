@@ -1,0 +1,43 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+A one-page marketing site for VexWave (the desktop app lives at `github.com/VexWave/vex-app`).
+
+## Tooling
+
+- **Bun**, not npm — `bun.lock` is the lockfile, CI runs `bun install --frozen-lockfile`. `README.md` is unmodified `sv create` boilerplate and its `npm install` instructions are wrong; ignore it.
+- `bun run check` (svelte-check) is the **only** verification gate — there are no tests and no linter. CI runs it before building, so a type or a11y error there fails the deploy.
+- `.npmrc` sets `engine-strict=true`.
+
+## Static prerendering
+
+`src/routes/+layout.ts` sets `prerender = true` and `vite.config.ts` uses `adapter-static`. GitHub Pages serves files only, so **there is no server at runtime**: no `+page.server.ts`, no `+server.ts` endpoints, no form actions, no server `load`. Everything must be resolvable at build time.
+
+Prerendered HTML is hydrated on the client, so component render must be deterministic — no `Math.random()`, `Date.now()`, or `window` reads during render, or the client will reconcile against different markup. `src/lib/components/WaveBars.svelte` uses a seeded `noise()` function for exactly this reason; follow that pattern instead of reaching for randomness.
+
+## Base path
+
+`vite.config.ts` reads `BASE_PATH`, which `.github/workflows/deploy.yml` passes from `actions/configure-pages`. It is **unset locally**, and any value not starting with `/` is ignored — so a broken base path will not show up in `bun run dev`.
+
+Consequences:
+
+- Internal links go through `base` from `$app/paths`: `href="{base}/about"`, never `href="/about"`.
+- Reference assets by importing them (`import logo from '$lib/assets/vex-logo.png'`) so Vite rewrites the URL. Hand-written paths into `static/` bypass the base path and break on a prefixed deploy.
+- `static/.nojekyll` must stay — without it Pages strips the `_app/` build directory.
+
+## Svelte
+
+Runes mode is **forced** in `vite.config.ts` for every file outside `node_modules`. Use `$props`, `$state`, `$derived`, `$effect`; `export let` and `$:` will not compile.
+
+## Styling
+
+- Single dark theme on purpose (`color-scheme: dark` in `src/app.css`, no light-mode branch) — the product screenshots are dark-on-dark. Do not add a light palette.
+- All colors, fonts, and the transport-bar height are custom properties defined on `:root` in `src/app.css` (`--ink*`, `--paper*`, `--wave*`, `--line*`, `--display`/`--body`/`--mono`, `--transport`). Use the tokens; don't hardcode hex values.
+- The transport bar is `position: fixed` at the foot, so page content reserves `var(--transport)` in its bottom padding.
+- Styles are component-scoped. Reaching a child component's markup needs `:global()` (e.g. `.hero :global(.wave)` in `src/routes/+page.svelte`).
+- Fonts are self-hosted (`@fontsource/*` plus a vendored Outfit woff2). No CDN font links.
+
+## Conventions
+
+- Tabs for indentation, single quotes in TS/JS. No formatter is configured — match surrounding style by hand.
