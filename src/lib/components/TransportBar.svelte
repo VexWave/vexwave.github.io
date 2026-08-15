@@ -2,16 +2,17 @@
 	/*
 	 * The page's persistent call to action, shaped like the app's player bar:
 	 * artwork and title on the left, the round transport control in the middle.
-	 * Here the control downloads instead of playing. It fades in once the hero's
-	 * own buttons have scrolled away, so the CTA is never doubled on screen.
+	 * Here the control opens the source instead of playing. It fades in once the
+	 * hero's own buttons have scrolled away, so the CTA is never doubled on screen.
 	 */
 	import logo from '$lib/assets/vex-logo.png';
+	import { GITHUB_MARK } from '$lib';
 
 	let { href }: { href: string } = $props();
 
 	let past = $state(false);
 
-	// Set from the real offset on mount too, not only on the next scroll — a
+	// Set from the real offset on mount too, not only on the next scroll: a
 	// reload part-way down the page would otherwise start with the bar hidden.
 	$effect(() => {
 		past = window.scrollY > 520;
@@ -25,21 +26,13 @@
 		<img class="art" src={logo} alt="" />
 		<div class="meta">
 			<span class="title">VexWave</span>
-			<span class="sub">Desktop music player · your server</span>
+			<span class="sub">Desktop client · bring your own server</span>
 		</div>
 
-		<a class="control" {href} tabindex={past ? 0 : -1}>
-			<svg viewBox="0 0 24 24" aria-hidden="true">
-				<path
-					d="M12 3v12m0 0 5-5m-5 5-5-5M4 20h16"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2.2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				/>
-			</svg>
-			<span>Download</span>
+		<a class="control" {href} rel="noreferrer" tabindex={past ? 0 : -1}>
+			<!-- GitHub mark, Simple Icons (CC0) -->
+			<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d={GITHUB_MARK} /></svg>
+			<span>View on GitHub</span>
 		</a>
 	</div>
 </div>
