@@ -80,7 +80,6 @@
 			</p>
 			<div class="actions">
 				<a class="btn-primary" href={BACKEND} rel="noreferrer">Server: vex-backend</a>
-				<a class="btn-quiet" href={REPO} rel="noreferrer">App: vex-app</a>
 			</div>
 		</div>
 
