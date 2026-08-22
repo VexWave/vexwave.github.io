@@ -5,7 +5,7 @@
 	import TransportBar from '$lib/components/TransportBar.svelte';
 	import ShotSlider from '$lib/components/ShotSlider.svelte';
 	import logo from '$lib/assets/vex-logo.png';
-	import preview from '$lib/assets/shots/library.png';
+	import preview from '$lib/assets/og.png';
 
 	const REPO = 'https://github.com/VexWave/vex-app';
 	const BACKEND = 'https://github.com/VexWave/vex-backend';
@@ -31,7 +31,7 @@
 	<meta property="og:image:height" content="1188" />
 	<meta
 		property="og:image:alt"
-		content="The VexWave library, with Static Bloom playing in the transport bar."
+		content="The VexWave library, with the VexWave wordmark across the foot."
 	/>
 
 	<meta name="twitter:card" content="summary_large_image" />
