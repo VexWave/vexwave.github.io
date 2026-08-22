@@ -78,7 +78,7 @@
 				then enter its address in the app.
 			</p>
 			<div class="actions">
-				<a class="btn-primary" href={BACKEND} rel="noreferrer">Server: vex-backend</a>
+				<a class="btn-primary" href={BACKEND} rel="noreferrer">Open vex-backend</a>
 			</div>
 		</div>
 
