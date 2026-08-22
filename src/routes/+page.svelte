@@ -10,10 +10,9 @@
 	const REPO = 'https://github.com/VexWave/vex-app';
 	const BACKEND = 'https://github.com/VexWave/vex-backend';
 
-	// Link previews need absolute URLs, and `base` prerenders to a relative path.
 	const SITE = 'https://vexwave.github.io';
 
-	const TITLE = 'VexWave, a desktop music player for your own server';
+	const TITLE = 'VexWave, a desktop music player';
 	const DESCRIPTION = 'VexWave is a desktop music player for a backend you host yourself.';
 </script>
 
