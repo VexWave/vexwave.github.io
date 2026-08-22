@@ -5,17 +5,37 @@
 	import TransportBar from '$lib/components/TransportBar.svelte';
 	import ShotSlider from '$lib/components/ShotSlider.svelte';
 	import logo from '$lib/assets/vex-logo.png';
+	import preview from '$lib/assets/shots/library.png';
 
 	const REPO = 'https://github.com/VexWave/vex-app';
 	const BACKEND = 'https://github.com/VexWave/vex-backend';
+
+	// Link previews need absolute URLs, and `base` prerenders to a relative path.
+	const SITE = 'https://vexwave.github.io';
+
+	const TITLE = 'VexWave, a desktop music player for your own server';
+	const DESCRIPTION = 'VexWave is a desktop music player for a backend you host yourself.';
 </script>
 
 <svelte:head>
-	<title>VexWave, a desktop music player for your own server</title>
+	<title>{TITLE}</title>
+	<meta name="description" content={DESCRIPTION} />
+	<link rel="canonical" href="{SITE}/" />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="VexWave" />
+	<meta property="og:url" content="{SITE}/" />
+	<meta property="og:title" content={TITLE} />
+	<meta property="og:description" content={DESCRIPTION} />
+	<meta property="og:image" content="{SITE}{preview}" />
+	<meta property="og:image:width" content="1800" />
+	<meta property="og:image:height" content="1188" />
 	<meta
-		name="description"
-		content="VexWave is a desktop music player for a backend you host yourself. It needs vex-backend running. There is no hosted VexWave service to sign in to."
+		property="og:image:alt"
+		content="The VexWave library, with Static Bloom playing in the transport bar."
 	/>
+
+	<meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
 
 <TransportBar href={REPO} />
