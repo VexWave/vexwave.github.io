@@ -30,7 +30,7 @@
 			id: 'settings',
 			label: 'Settings',
 			src: settingsShot,
-			alt: 'Settings: the ten-band equalizer with its sliders, beside the Discord presence switch.',
+			alt: 'Settings: the ten-band equalizer with its sliders, above the Discord presence switch.',
 			items: ['Shuffle', 'Repeat', 'Equalizer', 'Discord presence']
 		}
 	];
