@@ -687,6 +687,7 @@
 
 	@media (max-width: 1023px) {
 		.server-frame {
+			min-height: 0;
 			margin-top: var(--s-7);
 		}
 	}
@@ -720,22 +721,13 @@
 		gap: var(--s-3);
 	}
 
-	/* features at rest (tablet, phone): a screen at least on a tablet, two on a phone, growing rather than running into #server */
+	/* features at rest (tablet, phone): as tall as its steps, a screen at least, so no empty screen follows them */
 	@media (min-width: 640px) and (max-width: 1023px) {
 		.mo-pc__visual > img {
 			max-height: 22svh;
 		}
 	}
 
-	@media (max-width: 639px) {
-		main > #features[data-moment]:not(:global(.is-live)) {
-			min-height: 200lvh;
-		}
-
-		#server {
-			--hm: 2;
-		}
-	}
 
 	.footer__mark {
 		gap: var(--s-4);
