@@ -11,6 +11,8 @@
 	const BACKEND = 'https://github.com/VexWave/vex-backend';
 
 	const SITE = 'https://vexwave.github.io';
+	// Joined, not concatenated: the imported URL is root-relative in the prerender but absolute once hydrated.
+	const OG_IMAGE = new URL(preview, SITE).href;
 
 	const TITLE = 'VexWave, a desktop music player';
 	const DESCRIPTION = 'VexWave is a desktop music player for a backend you host yourself.';
@@ -26,7 +28,7 @@
 	<meta property="og:url" content="{SITE}/" />
 	<meta property="og:title" content={TITLE} />
 	<meta property="og:description" content={DESCRIPTION} />
-	<meta property="og:image" content="{SITE}{preview}" />
+	<meta property="og:image" content={OG_IMAGE} />
 	<meta property="og:image:width" content="1800" />
 	<meta property="og:image:height" content="1188" />
 	<meta
