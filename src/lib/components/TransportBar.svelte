@@ -5,8 +5,8 @@
 	 * Here the control opens the source instead of playing. It fades in once the
 	 * hero's own buttons have scrolled away, so the CTA is never doubled on screen.
 	 */
-	import logo from '$lib/assets/vex-logo.png';
-	import { GITHUB_MARK } from '$lib';
+	import logo from '#lib/assets/vex-logo.png';
+	import { GITHUB_MARK } from '#lib';
 
 	let { href }: { href: string } = $props();
 

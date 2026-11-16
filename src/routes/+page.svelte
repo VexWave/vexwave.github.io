@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { base } from '$app/paths';
-	import { GITHUB_MARK } from '$lib';
-	import WaveBars from '$lib/components/WaveBars.svelte';
-	import TransportBar from '$lib/components/TransportBar.svelte';
-	import ShotSlider from '$lib/components/ShotSlider.svelte';
-	import logo from '$lib/assets/vex-logo.png';
-	import preview from '$lib/assets/og.png';
+	import { resolve } from '$app/paths';
+	import { GITHUB_MARK } from '#lib';
+	import WaveBars from '#lib/components/WaveBars.svelte';
+	import TransportBar from '#lib/components/TransportBar.svelte';
+	import ShotSlider from '#lib/components/ShotSlider.svelte';
+	import logo from '#lib/assets/vex-logo.png';
+	import preview from '#lib/assets/og.png';
 
 	const REPO = 'https://github.com/VexWave/vex-app';
 	const BACKEND = 'https://github.com/VexWave/vex-backend';
@@ -40,7 +40,7 @@
 <TransportBar href={REPO} />
 
 <header class="masthead">
-	<a class="brand" href="{base}/">
+	<a class="brand" href={resolve('/')}>
 		<img src={logo} alt="" width="28" height="26" />
 		<span>VexWave</span>
 	</a>

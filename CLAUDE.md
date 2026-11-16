@@ -7,7 +7,9 @@ A one-page marketing site for VexWave (the desktop app lives at `github.com/VexW
 ## Tooling
 
 - **Bun**, not npm. `bun.lock` is the lockfile, CI runs `bun install --frozen-lockfile`. `README.md` is unmodified `sv create` boilerplate and its `npm install` instructions are wrong; ignore it.
-- `bun run check` (svelte-check) is the **only** verification gate; there are no tests and no linter. CI runs it before building, so a type or a11y error there fails the deploy.
+- `bun run check` (svelte-check) is the **only** verification gate; there are no tests and no linter. CI runs it before building, so a type or a11y error there fails the deploy. Bun's own `bun check` defers to this script; with `--no-script` it skips `.svelte` files entirely, so it is not a substitute.
+- Every script runs on Bun's runtime (`bun --bun`), so Node is not needed. SvelteKit 3 requires Node 22.17+ when run under Node.
+- `typescript` stays: svelte-check requires it as a peer. Both it and SvelteKit 3 cap TypeScript at 6.
 - `.npmrc` sets `engine-strict=true`.
 
 ## Static prerendering
@@ -22,8 +24,12 @@ Prerendered HTML is hydrated on the client, so component render must be determin
 
 Consequences:
 
-- Internal links go through `base` from `$app/paths`: `href="{base}/about"`, never `href="/about"`.
-- Reference assets by importing them (`import logo from '$lib/assets/vex-logo.png'`) so Vite rewrites the URL. Hand-written paths into `static/` bypass the base path and break on a prefixed deploy.
+- Internal links go through `resolve` from `$app/paths`: `href={resolve('/about')}`, never `href="/about"`. SvelteKit 3 removed `base`.
+- Reference assets by importing them (`import logo from '#lib/assets/vex-logo.png'`) so Vite rewrites the URL. Hand-written paths into `static/` bypass the base path and break on a prefixed deploy.
+
+## `#lib`
+
+SvelteKit 3 dropped `$lib`. The `#lib` alias is Node subpath imports, declared in `package.json` `imports`. Bare `'#lib'` maps to `src/lib/index.ts`; `'#lib/...'` paths need the file extension.
 - `static/.nojekyll` must stay; without it Pages strips the `_app/` build directory.
 
 ## Svelte

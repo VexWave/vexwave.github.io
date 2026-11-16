@@ -1,4 +1,4 @@
-// place files you want to import through the `$lib` alias in this folder.
+// place files you want to import through the `#lib` alias in this folder.
 
 // Simple Icons' GitHub mark (CC0), inlined rather than imported: the package is
 // thousands of icons for the one path used here.

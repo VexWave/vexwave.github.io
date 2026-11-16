@@ -1,8 +1,8 @@
 <script lang="ts">
-	import libraryShot from '$lib/assets/shots/library.png';
-	import discoverShot from '$lib/assets/shots/discover.png';
-	import effectsShot from '$lib/assets/shots/effects.png';
-	import settingsShot from '$lib/assets/shots/settings.png';
+	import libraryShot from '#lib/assets/shots/library.png';
+	import discoverShot from '#lib/assets/shots/discover.png';
+	import effectsShot from '#lib/assets/shots/effects.png';
+	import settingsShot from '#lib/assets/shots/settings.png';
 
 	const slides = [
 		{
