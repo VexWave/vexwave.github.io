@@ -39,10 +39,11 @@ Runes mode is **forced** in `vite.config.ts` for every file outside `node_module
 ## Styling
 
 - Single dark theme on purpose (`color-scheme: dark` in `src/app.css`, no light-mode branch), because the product screenshots are dark-on-dark. Do not add a light palette.
-- All colors, fonts, and the transport-bar height are custom properties defined on `:root` in `src/app.css` (`--ink*`, `--paper*`, `--wave*`, `--line*`, `--display`/`--body`/`--mono`, `--transport`). Use the tokens; don't hardcode hex values.
-- The transport bar is `position: fixed` at the foot, so page content reserves `var(--transport)` in its bottom padding.
-- Styles are component-scoped. Reaching a child component's markup needs `:global()` (e.g. `.hero :global(.wave)` in `src/routes/+page.svelte`).
-- Fonts are self-hosted (`@fontsource/*` plus a vendored Outfit woff2). No CDN font links.
+- The page is built on the taste-skill kit, vendored as plain files in `static/kit/` (system, cards, motion, layout, icons, the terminal fragment, the pinned-chapters moment). `src/app.html` links its CSS through `%sveltekit.assets%`; `src/routes/+layout.svelte` imports its scripts in `onMount`, after hydration, because they rewrite DOM that Svelte would otherwise reconcile. Don't edit kit files; use its classes (`.wrap`, `.grid`, `.span-*`, `.btn`, `.section`, `footer.closing`).
+- The palette is the kit's `--p-*` tokens (plus `--ground-*` and the brand `--wave*` triad), set on `html:root` in `src/app.css` so they outrank the kit's own defaults. Fonts are `--font-display`/`--font-text`/`--font-mono`. Components read the ground tokens the kit derives (`--bg`, `--ink`, `--muted`, `--line`, `--accent`). Don't hardcode hex values.
+- Every section is exactly one or two screens tall (`--h`; `--hm` on phones) with its h2 first. The header is the only fixed element. The exception is `#features` while the pinned moment is live (desktop): one screen of scroll per chapter (`--mo-hold: var(--n)`), so chapters + 1 screens, the pace the client asked for.
+- Styles are component-scoped. Kit-generated markup needs `:global()` (e.g. `#features :global(.mo-pc__visuals)`).
+- Fonts are self-hosted (`@fontsource/*` plus a vendored Outfit 600 woff2 for the wordmark). No CDN font links.
 
 ## Conventions
 

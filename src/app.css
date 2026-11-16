@@ -1,12 +1,12 @@
+@import '@fontsource/outfit/500.css';
 @import '@fontsource/instrument-sans/400.css';
 @import '@fontsource/instrument-sans/500.css';
 @import '@fontsource/ibm-plex-mono/400.css';
 @import '@fontsource/ibm-plex-mono/500.css';
 
 /*
- * Outfit SemiBold, the same file the app vendors for its wordmark. Copied
- * rather than pulled from a CDN so the site and the app render the name in
- * the identical face.
+ * Outfit SemiBold, the same file the app vendors for its wordmark, so the site
+ * and the app render the name in the identical face. Headlines use 500.
  */
 @font-face {
 	font-family: 'Outfit';
@@ -18,101 +18,57 @@
 }
 
 /*
- * One theme, deliberately. VexWave's chrome is dark, and all three product
- * shots are dark-on-dark; a light ground would leave them floating as black
- * slabs. The neutrals are biased toward the brand violet rather than pure
- * grey, so the ground reads as part of the accent's family.
+ * One dark theme, deliberately: every product shot is dark-on-dark. The kit in
+ * static/kit reads its palette from the --p-* tokens below; `html:root` outranks
+ * its own defaults, which load first. Neutrals stay neutral so the violet, the
+ * app's own nav colour, is the one accent.
  */
-:root {
-	--ink: #08070c;
-	--ink-raised: #100d18;
-	--ink-sunken: #05040a;
-	--line: #1e1a2b;
-	--line-bright: #2c2640;
+html:root {
+	--p-bg: #0b0b0e;
+	--p-surface: #15151a;
+	--p-ink: #f2f1f5;
+	--p-muted: #a3a0ad;
+	--p-accent: #7b2df0;
+	--p-accent-ink: #ffffff;
+	--p-action: #7b2df0;
+	--p-action-ink: #ffffff;
 
-	--paper: #f3f1f8;
-	--paper-dim: #9a94ac;
-	--paper-faint: #6b6580;
+	/* The band behind the server section: the app's player-bar violet, nearly black. */
+	--p-inv-bg: #130f1d;
+	--p-inv-surface: #1c1729;
+	--p-inv-ink: #f2f1f5;
+	--p-inv-muted: #aca6bb;
+	--p-inv-accent: #c4a2fb;
+	--p-inv-accent-ink: #0b0b0e;
+	--p-inv-action: #7b2df0;
+	--p-inv-action-ink: #ffffff;
 
-	/* The app's --nav triad, at the three lightnesses the mark needs. */
+	/* The lit ground behind product windows. */
+	--ground-bg: #1a1526;
+	--ground-surface: #241d35;
+	--ground-ink: #f2f1f5;
+	--ground-muted: #b3acc4;
+	--ground-accent: #c4a2fb;
+
+	/* The app's --nav triad, for marks and glows. */
 	--wave: #7b2df0;
 	--wave-edge: #9a5bf5;
 	--wave-bright: #c4a2fb;
 
-	--display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
-	--body: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
-	--mono: 'IBM Plex Mono', ui-monospace, monospace;
-
-	/* Height of the fixed transport bar; content reserves it at the page foot. */
-	--transport: 76px;
+	--font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+	--font-text: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+	--display-weight: 500;
+	--display-tracking: -0.025em;
 
 	color-scheme: dark;
 }
 
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-}
-
 html {
-	-webkit-text-size-adjust: 100%;
 	-webkit-tap-highlight-color: transparent;
-}
-
-body {
-	margin: 0;
-	background: var(--ink);
-	color: var(--paper);
-	font-family: var(--body);
-	font-size: 1rem;
-	line-height: 1.65;
-	-webkit-font-smoothing: antialiased;
-	text-rendering: optimizeLegibility;
-}
-
-h1,
-h2,
-h3 {
-	font-family: var(--display);
-	font-weight: 600;
-	line-height: 1.05;
-	letter-spacing: -0.02em;
-	text-wrap: balance;
-	margin: 0;
-}
-
-p {
-	margin: 0;
-}
-
-a {
-	color: inherit;
-}
-
-img {
-	max-width: 100%;
-	display: block;
-}
-
-:focus-visible {
-	outline: 2px solid var(--wave-edge);
-	outline-offset: 3px;
-	border-radius: 2px;
 }
 
 ::selection {
 	background: var(--wave);
-	color: var(--paper);
-}
-
-@media (prefers-reduced-motion: reduce) {
-	*,
-	*::before,
-	*::after {
-		animation-duration: 0.01ms !important;
-		animation-iteration-count: 1 !important;
-		transition-duration: 0.01ms !important;
-		scroll-behavior: auto !important;
-	}
+	color: var(--p-ink);
 }
