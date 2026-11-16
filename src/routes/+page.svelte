@@ -336,6 +336,20 @@
 								</div>
 							</div>
 						</div>
+						<div
+							class="login"
+							role="img"
+							aria-label="The VexWave login screen with a server address, username and password filled in."
+						>
+							<p class="login__title">Welcome to VexWave</p>
+							<span class="login__label">Server address</span>
+							<span class="login__field">http://music.home.lan:3700</span>
+							<span class="login__label">Username</span>
+							<span class="login__field">you</span>
+							<span class="login__label">Password</span>
+							<span class="login__field">••••••••••</span>
+							<span class="login__button">Log in</span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -597,7 +611,7 @@
 		width: auto;
 	}
 
-	/* fills the screen's content height where there is room, and never drops below the terminal's own height, so nothing crops */
+	/* step one above step three, sized by its content so nothing crops; the login card only where the screen holds both */
 	.server-frame {
 		--ratio: 0px;
 		aspect-ratio: auto;
@@ -608,11 +622,67 @@
 		position: relative;
 		inset: auto;
 		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--s-6);
 	}
 
-	.server-frame .stage > .at-rise {
+	.server-frame .stage > * {
 		position: static;
+		flex: none;
+	}
+
+	.server-frame .at-rise {
 		width: 100%;
+	}
+
+	.login {
+		width: min(100%, 360px);
+		display: grid;
+		gap: var(--s-1);
+		padding: var(--s-5);
+		border: 1px solid var(--line-strong);
+		border-radius: var(--r-md);
+		background: var(--ground-surface);
+		color: var(--ground-ink);
+		font-size: var(--t-small);
+		box-shadow: 0 30px 80px -30px color-mix(in oklab, var(--p-bg) 80%, transparent);
+	}
+
+	.login__title {
+		margin-bottom: var(--s-2);
+		font-family: var(--font-display);
+		font-size: var(--t-card);
+		text-align: center;
+	}
+
+	.login__label {
+		font-weight: 500;
+	}
+
+	.login__field {
+		margin-bottom: var(--s-3);
+		padding: var(--s-1) var(--s-3);
+		border: 1px solid var(--line-strong);
+		border-radius: var(--r-sm);
+		font-family: var(--font-mono);
+		color: var(--ground-muted);
+	}
+
+	.login__button {
+		padding: var(--s-2);
+		border-radius: var(--r-sm);
+		background: var(--p-ink);
+		color: var(--p-bg);
+		font-weight: 500;
+		text-align: center;
+	}
+
+	@media (max-height: 839px), (max-width: 1023px) {
+		.login {
+			display: none;
+		}
 	}
 
 	@media (max-width: 1023px) {
